@@ -44,6 +44,9 @@ public class DynamicGridView extends GridView {
     private static final int MOVE_DURATION = 300;
     private static final int SMOOTH_SCROLL_AMOUNT_AT_EDGE = 8;
 
+    /**
+     * 拖动起来的cell
+     */
     private BitmapDrawable mHoverCell;
     private Rect mHoverCellCurrentBounds;
     private Rect mHoverCellOriginalBounds;
@@ -75,7 +78,10 @@ public class DynamicGridView extends GridView {
     private List<ObjectAnimator> mWobbleAnimators = new LinkedList<ObjectAnimator>();
     private boolean mHoverAnimation;
     private boolean mReorderAnimation;
-    private boolean mWobbleInEditMode = true;
+    /**
+     * 是否抖动
+     */
+    private boolean mWobbleInEditMode = false;
     private boolean mIsEditModeEnabled = true;
 
     private OnScrollListener mUserScrollListener;
@@ -131,6 +137,7 @@ public class DynamicGridView extends GridView {
 
     /**
      * Start edit mode without starting drag;
+     * 开始拖动的时候 设置为edit模式
      */
     public void startEditMode() {
         startEditMode(-1);
@@ -1014,6 +1021,7 @@ public class DynamicGridView extends GridView {
      * cell is at either edge of the gridview, the gridview will begin scrolling. As
      * scrolling takes place, the gridview continuously checks if new cells became visible
      * and determines whether they are potential candidates for a cell swap.
+     * 滚动监听
      */
     private OnScrollListener mScrollListener = new OnScrollListener() {
 
